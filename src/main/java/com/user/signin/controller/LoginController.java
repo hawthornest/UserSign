@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @Date 2018-04-24 14:53
  */
 
+//test git branch
 @RestController
 public class LoginController {
     @GetMapping("/HelloWorld")
