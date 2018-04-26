@@ -1,0 +1,68 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录注册页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #usernameid {
+            color:white;
+        }
+        #usernameinput {
+            left:550px;
+        }
+    </style>
+</head>
+
+<body background="">
+
+<div class="container">
+    <div class="page-header">
+        <h1>登录注册页面</h1>
+    </div>
+    <div class="col-md-8" style="height:0px;padding-top:0px;left:0px;">
+        <img src="loginpic.jpg" width="600" height="700">
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group" style="height:10px;padding-top:100px;left:0px;">
+                <span class="input-group-addon" id="usernameinput">账号</span>
+                <input type="text" class="form-control" value="" id="usernameid" left="6000px"/>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">密码</span>
+                <input type="text" class="form-control" value="" id="passwordid"/>
+            </div>
+            <br/>
+            <div class="btn-group">
+                <div>
+                    <button class="btn btn-default" id="generateBtn">登录</button>
+                    <button class="btn btn-default" style="margin-left:20px;" id="resetBtn">注册</button>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <h3>响应结果</h3>
+
+
+            <div>
+                <span id="resultSpan"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    // 点击登录按钮时,构造请求参数,调用生成登录接口
+
+    $("#generateBtn").click(function () {
+        var genXmlUrl = "/login?";
+        var requestParam = "userName="+$("#usernameid").val()+"&passWord="+$("#passwordid").val()
+        $.get(genXmlUrl+requestParam,function(data,status){
+            alert("数据：" + data + "\n状态：" + status);
+        });
+    });
+</script>
+</html>

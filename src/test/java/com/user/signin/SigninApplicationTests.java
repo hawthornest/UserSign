@@ -3,6 +3,7 @@ package com.user.signin;
 import com.user.signin.controller.LoginController;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,20 @@ public class SigninApplicationTests {
 	Logger logger = Logger.getLogger(LoginController.class);
 	@Autowired
 	private MockMvc mvc;
+
+	@BeforeClass
+	public static void initConfig()
+	{
+		PropertyConfigurator.configure("config/log4j.properties");
+	}
+
 	@Test
 	public void contextLoads() {
-		PropertyConfigurator.configure("config/log4j.properties");
 		String testCase = "登录:密码为空";
 		try {
-			String responseString = mvc.perform(MockMvcRequestBuilders.get("/login?userName=test&passWord=")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString(); ;
+			String responseString = mvc.perform(MockMvcRequestBuilders.get("/login?userName=test&passWord=")).andReturn().getResponse().getContentAsString(); ;
 			logger.info(testCase+"的返回包为:"+responseString);
+			org.junit.Assert.assertEquals(responseString,"200");
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
@@ -43,5 +51,4 @@ public class SigninApplicationTests {
 			logger.error("异常报错:"+sw.toString());
 		}
 	}
-
 }
